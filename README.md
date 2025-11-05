@@ -6,8 +6,9 @@ https://teletype.in/@rawrdcore/sDNOmJN3OpL
 1. Make sure Python is installed
 2. Clone the repository
 git clone https://github.com/rawrdcore/tg-hidden-messages-decoder.git
+
 cd tg-hidden-messages-decoder
-3. Usage
+4. Usage
 python braille_decoder.py --encode "we live in this world through different sensations"
 python braille_decoder.py --decode "⡨⡰⢃⡓⠱⡌⠚⡁⡊⡁⢤⡁⡓⡘⡌⡃⢃"
 
@@ -16,7 +17,8 @@ python braille_decoder.py --decode "⡨⡰⢃⡓⠱⡌⠚⡁⡊⡁⢤⡁⡓⡘�
 1. Убедитесь, что установлен Python
 2. Клонируйте репозиторий
 git clone https://github.com/rawrdcore/tg-hidden-messages-decoder.git
+
 cd tg-hidden-messages-decoder
-3. Использование
+4. Использование
 python braille_decoder.py --encode "мы в этом мире живем разными ощущениями"
 python braille_decoder.py --decode "⡨⡰⢃⡓⠱⡌⠚⡁⡊⡁⢤⡁⡓⡘⡌⡃⢃"
