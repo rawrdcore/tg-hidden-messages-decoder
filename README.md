@@ -10,3 +10,4 @@ cd tg-hidden-messages-decoder
 python braille_decoder.py --encode "мы в этом мире живем разными ощущениями"
 python braille_decoder.py --decode "⡨⡰⢃⡓⠱⡌⠚⡁⡊⡁⢤⡁⡓⡘⡌⡃⢃"
 
+https://teletype.in/@rawrdcore/sDNOmJN3OpL
