@@ -1,5 +1,6 @@
 # tg-hidden-messages-decoder
-https://teletype.in/@rawrdcore/sDNOmJN3OpL.␣␣
+https://teletype.in/@rawrdcore/sDNOmJN3OpL
+
 Простой навайбкоженный CLI-скрипт на Python для расшифровки скрытых тележных символов в русские и английский буквы и знаки.
 ## 🚀 Installation
 1. Make sure Python is installed:
