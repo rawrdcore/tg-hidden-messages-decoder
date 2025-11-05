@@ -2,6 +2,14 @@
 https://teletype.in/@rawrdcore/sDNOmJN3OpL
 Простой навайбкоженный CLI-скрипт на Python для расшифровки скрытых тележных символов в русские и английский буквы и знаки.
 ## 🚀 Installation
+1. Make sure Python is installed:
+2. Clone the repository
+git clone https://github.com/rawrdcore/tg-hidden-messages-decoder.git
+cd tg-hidden-messages-decoder
+3. Usage
+python braille_decoder.py --encode "we live in this world through different sensations"
+python braille_decoder.py --decode "⡨⡰⢃⡓⠱⡌⠚⡁⡊⡁⢤⡁⡓⡘⡌⡃⢃"
+
 ## 🚀 Установка
 
 1. Убедитесь, что установлен Python:
