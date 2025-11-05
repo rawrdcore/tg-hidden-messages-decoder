@@ -2,14 +2,14 @@
 # -*- coding: utf-8 -*-
 
 import sys
+from collections import OrderedDict
 
-# Список пар (точка, вариант). Если одна точка указана несколько раз — варианты будут объединены.
+# Список пар (точка, вариант)
 PAIRS = [
-    # Русские (из твоего списка) + цифры/знаки
     ("⠤", "А"), ("⠱", "а"), ("⠱", "4"),
     ("⠨", "Б"), ("⠲", "б"), ("⠲", "5"),
     ("⠰", "В"), ("⠴", "в"), ("⠴", "6"),
-    ("⡁", "Г"), ("⡁", " "),  # пробел
+    ("⡁", "Г"), ("⡁", " "),
     ("⠸", "г"), ("⠸", "7"),
     ("⡂", "Д"), ("⡃", "д"), ("⡃", "8"),
     ("⡄", "Е"), ("⡅", "е"), ("⡅", "9"),
@@ -40,40 +40,16 @@ PAIRS = [
     ("⠩", "Э"), ("⠩", "1"), ("⢡", "э"),
     ("⠪", "Ю"), ("⠪", "2"), ("⢢", "ю"),
     ("⠬", "Я"), ("⠬", "3"), ("⢤", "я"),
-
     ("⡁", "пробел"),
-    ("⡂", "!"),
-    ("⢠", '"'),
-    ("⠸", "№"),
-    ("⡉", ";"),
-    ("⠋", "%"),
-    ("⡆", ":"),
-    ("⡒", "?"),
-    ("⠖", "*"),
-    ("⠓", "("),
-    ("⠕", ")"),
-    ("⠝", "_"),
-    ("⠙", "+"),
-    ("⠜", "-"),
-    ("⡌", "="),
-    ("⡔", "@"),
-    ("⣀", "#"),
-    ("⠇", "$"),
-    ("⠛", "^"),
-    ("⠍", "&"),
-    ("⠞", "`"),
-    ("⡸", "~"),
-    ("⠏", "\\"),
-    ("⡲", "|"),
-    ("⠥", "/"),
-    ("⡑", ">"),
-    ("⡊", "<"),
-    ("⠚", ","),
-    ("⠣", "."),
+    ("⡂", "!"), ("⢠", '"'), ("⠸", "№"), ("⡉", ";"), ("⠋", "%"),
+    ("⡆", ":"), ("⡒", "?"), ("⠖", "*"), ("⠓", "("), ("⠕", ")"),
+    ("⠝", "_"), ("⠙", "+"), ("⠜", "-"), ("⡌", "="), ("⡔", "@"),
+    ("⣀", "#"), ("⠇", "$"), ("⠛", "^"), ("⠍", "&"), ("⠞", "`"),
+    ("⡸", "~"), ("⠏", "\\"), ("⡲", "|"), ("⠥", "/"), ("⡑", ">"),
+    ("⡊", "<"), ("⠚", ","), ("⠣", "."),
 ]
 
-from collections import OrderedDict
-
+# Словари
 BRAILLE_MAP = OrderedDict()
 for dot, val in PAIRS:
     if dot not in BRAILLE_MAP:
@@ -81,7 +57,15 @@ for dot, val in PAIRS:
     if val not in BRAILLE_MAP[dot]:
         BRAILLE_MAP[dot].append(val)
 
+ENCODE_MAP = OrderedDict()
+for dot, val in PAIRS:
+    if val not in ENCODE_MAP:
+        ENCODE_MAP[val] = dot
+
+# --- Функции ---
+
 def decode(text):
+    """Преобразует точки в буквы"""
     for ch in text:
         if ch in BRAILLE_MAP:
             variants = BRAILLE_MAP[ch]
@@ -90,12 +74,38 @@ def decode(text):
         else:
             print(f"{ch} -> ? (неизвестно)")
 
+def encode(text):
+    """Преобразует текст в точки"""
+    result = []
+    for ch in text:
+        if ch == " ":
+            ch = "пробел"
+        if ch in ENCODE_MAP:
+            result.append(ENCODE_MAP[ch])
+        elif ch.lower() in ENCODE_MAP:
+            result.append(ENCODE_MAP[ch.lower()])
+        else:
+            result.append("?")
+    print("".join(result))
+
+# --- Основной блок ---
+
 def main():
-    if len(sys.argv) < 2:
-        print("Использование: python braille_decoder.py \"⠬⡁⡒⢢⠲⡒...\"")
+    if len(sys.argv) < 3:
+        print("Использование:")
+        print("  python braille_decoder.py --decode \"⠬⡁⡒⢢⠲⡒\"")
+        print("  python braille_decoder.py --encode \"Привет\"")
         sys.exit(1)
-    text = sys.argv[1]
-    decode(text)
+
+    mode = sys.argv[1]
+    text = sys.argv[2]
+
+    if mode == "--decode":
+        decode(text)
+    elif mode == "--encode":
+        encode(text)
+    else:
+        print("Ошибка: укажи --encode или --decode")
 
 if __name__ == "__main__":
     main()
